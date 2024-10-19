@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Carrito de Compras</title>
+    <link href="STYLE.css" rel="stylesheet">
+</head>
+<body>
+    <header class="d-flex align-items-center justify-content-between p-3">
+        <!-- MENU LATERAL -->
+        <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
+            <div class="bg-dark p-4">
+                <h5 class="text-body-emphasis h4">Collapsed content</h5>
+                <span class="text-body-secondary">Toggleable via the navbar brand.</span>
+            </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href="HTML.html" class="btn btn-primary mt-2">Ir a Productos</a>
+
+        <!-- BUSCADOR CENTRADO -->
+        <nav class="navbar">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </nav>
+
+        <!-- CARRITO -->
+        <a class="navbar-brand" href="#">
+            <img src="IMAGE/cart-minus_9795507.png" alt="Cart" width="30" height="24">
+        </a>
+    </header>
+
+    <div class="container">
+        <h1>Carrito de Compras</h1>
+        <div id="cart-items" class="mb-4"></div>
+
+        <!-- Inputs para descuento y envío -->
+        <div class="mb-3">
+            <input type="text" id="inputDiscount" class="form-control" placeholder="Código de Descuento" />
+        </div>
+        <div class="mb-3">
+            <input type="number" id="inputShipping" class="form-control" placeholder="Costo de Envío" />
+        </div>
+        <button class="btn btn-primary" id="addDiscount">Aplicar Descuento</button>
+        <button class="btn btn-primary" id="addShipping">Agregar Costo de Envío</button>
+        <button class="btn btn-success" id="checkout">Proceder al Pago</button>
+    </div>
+
+    <script>
+        // Obtener productos del carrito de localStorage
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Mostrar los productos en el carrito
+        const cartDiv = document.getElementById('cart-items');
+        const displayCartItems = () => {
+            cartDiv.innerHTML = '';
+            if (cartItems.length === 0) {
+                cartDiv.innerHTML = '<p>No hay productos en el carrito.</p>';
+            } else {
+                cartItems.forEach((item, index) => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.innerHTML = `
+                        <p>${item.name} - Cantidad: ${item.quantity} 
+                            <button class="btn btn-danger btn-sm remove-item" data-index="${index}">Eliminar</button>
+                        </p>`;
+                    cartDiv.appendChild(itemDiv);
+                });
+            }
+        };
+        displayCartItems();
+
+        // Agregar descuento
+        document.getElementById('addDiscount').addEventListener('click', () => {
+            const discountCode = document.getElementById('inputDiscount').value;
+            if (discountCode) {
+                alert(`Descuento aplicado: ${discountCode}`);
+                // Lógica para aplicar descuento aquí
+                document.getElementById('inputDiscount').value = ''; // Limpiar input
+            } else {
+                alert('Por favor, ingrese un código de descuento válido.');
+            }
+        });
+
+        // Agregar costo de envío
+        document.getElementById('addShipping').addEventListener('click', () => {
+            const shippingCost = parseFloat(document.getElementById('inputShipping').value);
+            if (!isNaN(shippingCost) && shippingCost >= 0) {
+                alert(`Costo de envío agregado: $${shippingCost.toFixed(2)}`);
+                // Lógica para agregar costo de envío aquí
+                document.getElementById('inputShipping').value = ''; // Limpiar input
+            } else {
+                alert('Por favor, ingrese un costo de envío válido.');
+            }
+        });
+
+        // Eliminar producto del carrito
+        cartDiv.addEventListener('click', (event) => {
+            if (event.target.classList.contains('remove-item')) {
+                const index = event.target.getAttribute('data-index');
+                cartItems.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                displayCartItems();
+            }
+        });
+
+        // Proceder al Pago
+        document.getElementById('checkout').addEventListener('click', () => {
+            alert('Procediendo al pago...');
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-VKuwIp8KmkHDkEEqnr1nST4pyasr2F6CrVZ5LTrIv5Ihs3Y03qUlw+l4kfKJebzz" crossorigin="anonymous"></script>
+</body>
+</html>

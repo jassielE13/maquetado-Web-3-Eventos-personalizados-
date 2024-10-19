@@ -1,0 +1,85 @@
+/* General */
+body {
+    background-color: #f0f0f0; /* Color de fondo suave */
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+    background-color: #343a40; /* Color de fondo oscuro */
+    color: white; /* Color del texto en el header */
+}
+
+/* Estilo de las tarjetas de producto */
+.product-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center; /* Alinear texto al centro */
+    overflow: hidden; /* Evitar que el contenido se desborde */
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+    width: 100%; /* Asegurarse de que la imagen use todo el ancho del contenedor */
+    height: 150px; /* Mantener un tamaño fijo para las imágenes */
+    object-fit: cover; /* Mantener la relación de aspecto */
+    border-radius: 5px;
+    margin-bottom: 10px; /* Espaciado entre la imagen y el texto */
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+/* Estilo de los precios */
+.product-card p {
+    margin: 5px 0; /* Espaciado entre el texto */
+}
+
+.product-card .old-price {
+    color: red; /* Color del precio original */
+    font-weight: bold; /* Negrita para destacar el precio */
+    text-decoration: line-through; /* Precio original tachado */
+}
+
+.product-card .new-price {
+    color: green; /* Color del precio con descuento */
+    font-weight: bold; /* Negrita para destacar el precio */
+}
+
+.product-card .discount {
+    color: orange; /* Color para el texto de descuento */
+    font-weight: bold; /* Negrita para destacar el texto de descuento */
+}
+
+/* Estilo del botón "Agregar al carrito" */
+.add-to-cart {
+    margin-top: 10px; /* Espaciado superior para el botón */
+}
+
+.dark-theme {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-theme header {
+    background-color: #1e1e1e;
+}
+
+
+
+
+
+
+
+
+
+
